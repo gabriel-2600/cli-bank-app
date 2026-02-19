@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 void main() {
-
     try (Connection dbConnection = DatabaseConnection.getConnection()) {
         MainMenuView.mainMenuView();
 
