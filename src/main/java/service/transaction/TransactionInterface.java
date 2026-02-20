@@ -1,10 +1,9 @@
 package service.transaction;
 
-import model.Account;
+import java.util.List;
+
 import model.Transaction;
 
-import java.sql.SQLException;
-import java.util.List;
 
 public interface TransactionInterface {
     void depositInAccount(int accountID, double amount) throws Exception;

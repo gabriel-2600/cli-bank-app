@@ -1,6 +1,5 @@
 package view.dashboard.transaction;
 
-import model.Account;
 import model.Transaction;
 import model.Users;
 import repository.transaction.TransactionRepoImplementation;
@@ -112,6 +111,8 @@ public class TransactionFeaturesView {
                 scanner.nextLine();
             }
         }
+
+        scanner.close();
     }
 
     public static void deleteAccountView(int accountID, Users user){
@@ -150,6 +151,8 @@ public class TransactionFeaturesView {
                 System.out.println(e.getMessage());
             }
         }
+        
+        scanner.close();
     }
 
     public static void transactionHistoryView(int accountID, Users user){
@@ -199,5 +202,7 @@ public class TransactionFeaturesView {
                 scanner.nextLine();
             }
         }
+
+        scanner.close();
     }
 }

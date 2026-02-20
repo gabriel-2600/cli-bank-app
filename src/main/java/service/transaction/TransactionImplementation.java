@@ -1,6 +1,5 @@
 package service.transaction;
 
-import model.Account;
 import model.Transaction;
 import repository.transaction.TransactionRepoInterface;
 import utilities.Utilities;
