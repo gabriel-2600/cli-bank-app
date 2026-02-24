@@ -2,10 +2,17 @@ package view.dashboard.transaction;
 
 import model.Account;
 import model.Users;
+
 import repository.account.AccountRepoImplementation;
 import repository.account.AccountRepoInterface;
 import service.account.AccountImplementation;
 import service.account.AccountInterface;
+
+import service.transaction.TransactionImplementation;
+import service.transaction.TransactionInterface;
+import repository.transaction.TransactionRepoImplementation;
+import repository.transaction.TransactionRepoInterface;
+
 import view.dashboard.account.ExistingAccountView;
 
 import java.util.Scanner;
@@ -13,7 +20,10 @@ import java.util.Scanner;
 public class TransactionDashboardView {
     public static void transactionDashBoardView(int accountID, Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        AccountInterface accountInterface = new AccountImplementation(accountRepository);
+        TransactionRepoInterface transactionRepoImplementation = new TransactionRepoImplementation();
+        
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepoImplementation);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, transactionInterface);
 
         Scanner scanner = new Scanner(System.in);
         boolean isValid = false;

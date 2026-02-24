@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ExistingAccountView {
     public static void existingAccountView(Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        AccountInterface accountInterface = new AccountImplementation(accountRepository);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, null);
 
         try{
             List<Account> userAccount = accountInterface.viewAllAccountsOfUser(user);

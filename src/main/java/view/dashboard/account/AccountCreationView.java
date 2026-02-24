@@ -13,7 +13,7 @@ import view.dashboard.MainDashboard;
 public class AccountCreationView {
     public static void accountCreationView(Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        AccountInterface accountInterface = new AccountImplementation(accountRepository);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, null);
 
         Scanner scanner = new Scanner(System.in);
         boolean isValid = false;

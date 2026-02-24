@@ -7,13 +7,16 @@ import model.Users;
 import model.Account;
 
 import repository.account.AccountRepoInterface;
+import service.transaction.TransactionInterface;
 import utilities.Utilities;
 
 public class AccountImplementation implements AccountInterface{
     private AccountRepoInterface accountRepository;
+    private TransactionInterface transactionInterface;
 
-    public AccountImplementation(AccountRepoInterface accountRepository){
+    public AccountImplementation(AccountRepoInterface accountRepository, TransactionInterface transactionInterface){
         this.accountRepository = accountRepository;
+        this.transactionInterface = transactionInterface;
     }
 
     @Override
@@ -50,6 +53,7 @@ public class AccountImplementation implements AccountInterface{
         Utilities.validateNegativeBalance(amount);
 
         accountRepository.addToBalance(accountID, amount);
+        transactionInterface.createTransaction(accountID, amount, "deposit"); 
     }
 
     @Override
@@ -58,6 +62,7 @@ public class AccountImplementation implements AccountInterface{
         Utilities.validateAccountBalance(accountBalance, amount);
 
         accountRepository.subtractFromBalance(accountID, amount);
+        transactionInterface.createTransaction(accountID, amount, "withdraw");
     }
 
     @Override
@@ -70,6 +75,8 @@ public class AccountImplementation implements AccountInterface{
         }
 
         accountRepository.transferBetweenAccounts(accountID, recipientAccountID, amount);
+        int transactionID = transactionInterface.createTransaction(recipientAccountID, amount, "transfer");
+        transactionInterface.createTransfer(transactionID, recipientAccountID);
     }
 
     @Override

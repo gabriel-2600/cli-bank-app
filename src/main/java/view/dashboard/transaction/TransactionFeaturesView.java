@@ -24,8 +24,10 @@ import view.dashboard.account.ExistingAccountView;
 public class TransactionFeaturesView {
     public static void depositView(int accountID, Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
+        TransactionRepoInterface transactionRepoImplementation = new TransactionRepoImplementation();
+        
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepoImplementation);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, transactionInterface);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -39,7 +41,7 @@ public class TransactionFeaturesView {
                     return;
                 }
 
-                transactionInterface.depositInAccount(accountID, amount);
+                accountInterface.depositInAccount(accountID, amount);
                 TransactionDashboardView.transactionDashBoardView(accountID, user);
 
                 isValid = true;
@@ -58,8 +60,10 @@ public class TransactionFeaturesView {
 
     public static void withdrawView(int accountID, double accountBalance, Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
+        TransactionRepoInterface transactionRepoImplementation = new TransactionRepoImplementation();
+        
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepoImplementation);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, transactionInterface);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -73,7 +77,7 @@ public class TransactionFeaturesView {
                     return;
                 }
 
-                transactionInterface.withdrawInAccount(accountID, accountBalance, amount);
+                accountInterface.withdrawInAccount(accountID, accountBalance, amount);
                 TransactionDashboardView.transactionDashBoardView(accountID, user);
 
                 isValid = true;
@@ -91,8 +95,10 @@ public class TransactionFeaturesView {
 
     public static void transferView(int accountID, double accountBalance, Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
+        TransactionRepoInterface transactionRepoImplementation = new TransactionRepoImplementation();
+        
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepoImplementation);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, transactionInterface);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -111,7 +117,7 @@ public class TransactionFeaturesView {
                     return;
                 }
 
-                transactionInterface.transferToAnAccount(accountID, recipientAccountID, accountBalance, amount);
+                accountInterface.transferToAnAccount(accountID, recipientAccountID, accountBalance, amount);
                 TransactionDashboardView.transactionDashBoardView(accountID, user);
 
                 isValid = true;
@@ -129,7 +135,7 @@ public class TransactionFeaturesView {
 
     public static void deleteAccountView(int accountID, Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        AccountInterface accountInterface = new AccountImplementation(accountRepository);
+        AccountInterface accountInterface = new AccountImplementation(accountRepository, null);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -168,9 +174,9 @@ public class TransactionFeaturesView {
     }
 
     public static void transactionHistoryView(int accountID, Users user){
-        AccountRepoInterface accountRepository = new AccountRepoImplementation();
-        TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
+        TransactionRepoInterface transactionRepoImplementation = new TransactionRepoImplementation();
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepoImplementation);
+
         Scanner scanner = new Scanner(System.in);
 
         try{

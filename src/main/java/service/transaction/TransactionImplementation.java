@@ -3,19 +3,15 @@ package service.transaction;
 import java.util.List;
 
 import model.Transaction;
-
-import repository.account.AccountRepoInterface;
 import repository.transaction.TransactionRepoInterface;
 
 
 
 public  class TransactionImplementation implements TransactionInterface {
     private TransactionRepoInterface transactionRepository;
-    private AccountRepoInterface accountRepository;
 
-    public TransactionImplementation(TransactionRepoInterface transactionRepository, AccountRepoInterface accountRepository){
+    public TransactionImplementation(TransactionRepoInterface transactionRepository){
         this.transactionRepository = transactionRepository;
-        this.accountRepository = accountRepository;
     }
 
     @Override
