@@ -8,7 +8,7 @@ import java.util.List;
 public interface AccountInterface {
     void createAccount(Users user, String accountName, double balance) throws Exception;
 
-    List<Account> viewAllAccountsOfUser(Users user) throws Exception;
+    List<Account> viewAllAccountsOfUser(int userID) throws Exception;
 
     Account viewAccount(int accountID) throws Exception;
 

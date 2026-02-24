@@ -18,7 +18,7 @@ public class ExistingAccountView {
         AccountInterface accountInterface = new AccountImplementation(accountRepository, null);
 
         try{
-            List<Account> userAccount = accountInterface.viewAllAccountsOfUser(user);
+            List<Account> userAccount = accountInterface.viewAllAccountsOfUser(user.getUserID());
             chooseAnAccount(userAccount, user);
         } catch (Exception e){
             System.out.println(e.getMessage());

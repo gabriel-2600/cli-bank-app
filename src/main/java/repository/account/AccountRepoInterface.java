@@ -4,12 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Account;
-import model.Users;
 
 public interface AccountRepoInterface {
     void storeAccountInDatabase(Account account) throws SQLException;
 
-    List<Account> retrieveUserAccountsInDatabase(Users user) throws SQLException;
+    List<Account> retrieveUserAccountsInDatabase(int userID) throws SQLException;
 
     Account retrieveAccount(int accountID) throws SQLException;
 

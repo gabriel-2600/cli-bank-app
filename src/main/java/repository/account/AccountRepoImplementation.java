@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import repository.DatabaseConnection;
-import model.Users;
 import model.Account;
 
 public class AccountRepoImplementation implements AccountRepoInterface {
@@ -27,13 +26,13 @@ public class AccountRepoImplementation implements AccountRepoInterface {
     }
 
     @Override
-    public List<Account> retrieveUserAccountsInDatabase(Users user) throws SQLException {
+    public List<Account> retrieveUserAccountsInDatabase(int userID) throws SQLException {
         String sqlQuery = "SELECT * FROM accounts WHERE user_id = ?";
         List<Account> userAccounts = new ArrayList<>();
 
         try(Connection connection = DatabaseConnection.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1, user.getUserID());
+            preparedStatement.setInt(1, userID);
 
             ResultSet result = preparedStatement.executeQuery();
 
@@ -46,9 +45,8 @@ public class AccountRepoImplementation implements AccountRepoInterface {
 
                 userAccounts.add(account);
             }
-            user.setUserAccounts(userAccounts);
-
-            return user.getUserAccounts();
+            
+            return userAccounts;
         } catch(SQLException e){
             throw new SQLException(e);
         }

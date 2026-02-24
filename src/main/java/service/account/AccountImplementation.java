@@ -33,8 +33,8 @@ public class AccountImplementation implements AccountInterface{
     }
 
     @Override
-    public List<Account> viewAllAccountsOfUser(Users userData) throws Exception {
-        List<Account> userAccount = accountRepository.retrieveUserAccountsInDatabase(userData);
+    public List<Account> viewAllAccountsOfUser(int userID) throws Exception {
+        List<Account> userAccount = accountRepository.retrieveUserAccountsInDatabase(userID);
 
         if(userAccount.isEmpty()){
             throw new Exception("No existing accounts!");
