@@ -2,20 +2,30 @@ package view.dashboard.transaction;
 
 import model.Transaction;
 import model.Users;
-import repository.transaction.TransactionRepoImplementation;
-import repository.transaction.TransactionRepoInterface;
-import service.transaction.TransactionImplementation;
-import service.transaction.TransactionInterface;
-import view.dashboard.account.ExistingAccountView;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import repository.account.AccountRepoInterface;
+import repository.account.AccountRepoImplementation;
+import service.account.AccountInterface;
+import service.account.AccountImplementation;
+
+import repository.transaction.TransactionRepoInterface;
+import repository.transaction.TransactionRepoImplementation;
+import service.transaction.TransactionInterface;
+import service.transaction.TransactionImplementation;
+
+import view.dashboard.account.ExistingAccountView;
+
+
+
 public class TransactionFeaturesView {
     public static void depositView(int accountID, Users user){
+        AccountRepoInterface accountRepository = new AccountRepoImplementation();
         TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository);
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -47,8 +57,9 @@ public class TransactionFeaturesView {
     }
 
     public static void withdrawView(int accountID, double accountBalance, Users user){
+        AccountRepoInterface accountRepository = new AccountRepoImplementation();
         TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository);
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -79,8 +90,9 @@ public class TransactionFeaturesView {
     }
 
     public static void transferView(int accountID, double accountBalance, Users user){
+        AccountRepoInterface accountRepository = new AccountRepoImplementation();
         TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository);
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -116,8 +128,8 @@ public class TransactionFeaturesView {
     }
 
     public static void deleteAccountView(int accountID, Users user){
-        TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository);
+        AccountRepoInterface accountRepository = new AccountRepoImplementation();
+        AccountInterface accountInterface = new AccountImplementation(accountRepository);
         Scanner scanner = new Scanner(System.in);
 
         boolean isValid = false;
@@ -131,7 +143,7 @@ public class TransactionFeaturesView {
                 int option = scanner.nextInt();
                 switch (option){
                     case 1 ->{
-                        transactionInterface.deleteAccount(accountID);
+                        accountInterface.deleteAccount(accountID);
 
                         ExistingAccountView.existingAccountView(user);
                         isValid = true;
@@ -156,8 +168,9 @@ public class TransactionFeaturesView {
     }
 
     public static void transactionHistoryView(int accountID, Users user){
+        AccountRepoInterface accountRepository = new AccountRepoImplementation();
         TransactionRepoInterface transactionRepository = new TransactionRepoImplementation();
-        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository);
+        TransactionInterface transactionInterface = new TransactionImplementation(transactionRepository, accountRepository);
         Scanner scanner = new Scanner(System.in);
 
         try{

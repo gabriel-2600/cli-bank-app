@@ -3,8 +3,9 @@ package service.account;
 
 import java.util.List;
 
-import model.Account;
 import model.Users;
+import model.Account;
+
 import repository.account.AccountRepoInterface;
 import utilities.Utilities;
 
@@ -42,5 +43,37 @@ public class AccountImplementation implements AccountInterface{
     @Override
     public Account viewAccount(int accountID) throws Exception {
         return accountRepository.retrieveAccount(accountID);
+    }
+
+    @Override
+    public  void depositInAccount(int accountID, double amount) throws Exception {
+        Utilities.validateNegativeBalance(amount);
+
+        accountRepository.addToBalance(accountID, amount);
+    }
+
+    @Override
+    public void withdrawInAccount(int accountID, double accountBalance, double amount) throws Exception {
+        Utilities.validateNegativeBalance(amount);
+        Utilities.validateAccountBalance(accountBalance, amount);
+
+        accountRepository.subtractFromBalance(accountID, amount);
+    }
+
+    @Override
+    public void transferToAnAccount(int accountID, int recipientAccountID, double accountBalance, double amount) throws Exception {
+        Utilities.validateNegativeBalance(amount);
+        Utilities.validateAccountBalance(accountBalance, amount);
+
+        if(accountID == recipientAccountID){
+            throw new RuntimeException("Can not transfer to same bank account");
+        }
+
+        accountRepository.transferBetweenAccounts(accountID, recipientAccountID, amount);
+    }
+
+    @Override
+    public void deleteAccount(int accountID) throws Exception {
+        accountRepository.deleteAccount(accountID);
     }
 }

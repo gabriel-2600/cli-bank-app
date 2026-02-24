@@ -15,7 +15,7 @@ My goal is to learn the fundamentals of SOLID principles, applying the correct p
 
 ## SRP
 
-- Each files/class/functions I point to should only be resonsible for reason to change.
+- Each files/class/functions I point to should only be resonsible for one reason to change.
 
 ## How to Work
 
