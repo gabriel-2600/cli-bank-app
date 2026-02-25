@@ -22,7 +22,7 @@ public class AccountRepoImplementation implements AccountRepoInterface {
             preparedStatement.executeUpdate();
         } catch(SQLException e){
             throw new SQLException(e);
-        }
+        } 
     }
 
     @Override
