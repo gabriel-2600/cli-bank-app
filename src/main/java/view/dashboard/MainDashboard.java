@@ -41,7 +41,7 @@ public class MainDashboard {
             } catch (InputMismatchException e){
                 System.out.println("Please choose correct option");
                 scanner.nextLine();
-            }
+            } 
         }
 
         scanner.close();

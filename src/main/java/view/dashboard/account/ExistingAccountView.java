@@ -12,6 +12,8 @@ import view.dashboard.transaction.TransactionDashboardView;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.NoExistingAccountException;
+
 public class ExistingAccountView {
     public static void existingAccountView(Users user){
         AccountRepoInterface accountRepository = new AccountRepoImplementation();
@@ -20,7 +22,11 @@ public class ExistingAccountView {
         try{
             List<Account> userAccount = accountInterface.viewAllAccountsOfUser(user.getUserID());
             chooseAnAccount(userAccount, user);
-        } catch (Exception e){
+        } catch(NoExistingAccountException e){
+            System.out.println(e.getMessage());
+            MainDashboard.mainDashboardView(user);
+        } 
+        catch (Exception e){
             System.out.println(e.getMessage());
             MainDashboard.mainDashboardView(user);
         }

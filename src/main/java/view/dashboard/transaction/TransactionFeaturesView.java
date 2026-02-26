@@ -1,11 +1,13 @@
 package view.dashboard.transaction;
 
+import java.util.List;
+import java.util.Scanner;
+
 import model.Transaction;
 import model.Users;
 
 import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import exceptions.SameBankAccountException;
 
 import repository.account.AccountRepoInterface;
 import repository.account.AccountRepoImplementation;
@@ -109,7 +111,7 @@ public class TransactionFeaturesView {
                 int recipientAccountID = scanner.nextInt();
 
                 System.out.print("Input amount: ");
-                double amount = scanner.nextDouble();;
+                double amount = scanner.nextDouble();
 
                 if(amount == 0){
                     System.out.println("Exiting bank transfer");
@@ -123,6 +125,9 @@ public class TransactionFeaturesView {
                 isValid = true;
             } catch (InputMismatchException e) {
                 System.out.println("Please choose correct option");
+                scanner.nextLine();
+            }  catch(SameBankAccountException e){
+                System.out.println(e.getMessage());
                 scanner.nextLine();
             } catch (Exception e) {
                 System.out.println(e.getMessage());

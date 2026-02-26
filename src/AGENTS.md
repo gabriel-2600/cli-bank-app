@@ -13,6 +13,7 @@ My goal is to learn the fundamentals of SOLID principles, applying the correct p
   - Preserve business logic and all existing functionality.
   - Keep changes minimal and focused, prefer safe and understandable transformations.
 - Check if SRP, OCP and DIP is followed.
+- Check if Specific Exceptions is followed.
 
 ## SRP
 

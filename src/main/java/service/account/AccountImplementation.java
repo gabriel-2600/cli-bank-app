@@ -3,6 +3,8 @@ package service.account;
 
 import java.util.List;
 
+import exceptions.NoExistingAccountException;
+import exceptions.SameBankAccountException;
 import model.Users;
 import model.Account;
 
@@ -37,7 +39,7 @@ public class AccountImplementation implements AccountInterface{
         List<Account> userAccount = accountRepository.retrieveUserAccountsInDatabase(userID);
 
         if(userAccount.isEmpty()){
-            throw new Exception("No existing accounts!");
+            throw new NoExistingAccountException("No existing accounts!");
         }
 
         return userAccount;
@@ -71,7 +73,7 @@ public class AccountImplementation implements AccountInterface{
         Utilities.validateAccountBalance(accountBalance, amount);
 
         if(accountID == recipientAccountID){
-            throw new RuntimeException("Can not transfer to same bank account");
+            throw new SameBankAccountException("Can not transfer to same bank account");
         }
 
         accountRepository.transferBetweenAccounts(accountID, recipientAccountID, amount);
