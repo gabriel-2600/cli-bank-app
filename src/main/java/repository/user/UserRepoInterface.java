@@ -1,8 +1,14 @@
 package repository.user;
 import model.Users;
 
-public interface UserRepoInterface {
-    void registerInDatabase(Users user);
+import java.sql.SQLException;
+import java.util.Map;
 
-     Users validateLoginInDatabase(String username, String password);
+public interface UserRepoInterface {
+    void registerInDatabase(String fullName, String username, String hashedPassword) throws SQLException;
+
+    String retrieveHashedPassword(String username) throws SQLException;
+
+    Users validateLoginInDatabase(String username) throws SQLException;
+
 }

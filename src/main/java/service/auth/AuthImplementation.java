@@ -1,5 +1,6 @@
 package service.auth;
 
+import org.mindrot.jbcrypt.*;
 import model.Users;
 import repository.user.UserRepoInterface;
 
@@ -18,22 +19,24 @@ public class AuthImplementation implements AuthInterface {
         Utilities.validateInput(username);
         Utilities.validateInput(password);
 
-        Users user = new Users();
-        user.setFullName(fullName);
-        user.setUsername(username);
-        user.setPassword(password);
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        repository.registerInDatabase(user);
+        repository.registerInDatabase(fullName, username, hashedPassword);
     }
 
     @Override
     public Users login(String username, String password) throws Exception {
-        Users user = repository.validateLoginInDatabase(username, password);
+        String hashedPassword = repository.retrieveHashedPassword(username);
+        if(hashedPassword == null){
+            throw new Exception("No user found!");
+        }
 
-        if(user == null){
+
+        boolean isValid = BCrypt.checkpw(password, hashedPassword);
+        if(!isValid){
             throw new Exception("Invalid credentials!");
         }
 
-        return user;
+        return repository.validateLoginInDatabase(username);
     }
 }
